@@ -7,7 +7,7 @@ import struct
 import socket
 host = "10.9.147.126"
 port = 4894
-def recibir_p(filename)
+def recibir_p(filename):
     f = open("filename", "wb")
     
     while True:
