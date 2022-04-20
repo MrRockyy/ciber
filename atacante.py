@@ -44,11 +44,11 @@ port = 4894
 
 
 def recibir (filename):
-  f = open(filename, "wb")
+   f = open(filename, "wb")
    while True:
        data=conn.recv(1024)
        f.write(data)
-       if data.decode("UTF-8") == "a"
+       if data.decode("UTF-8") == "a":
           break
      
 
