@@ -46,6 +46,7 @@ port = 4894
 def recibir (filename):
    f = open(filename, "wb")
    while True:
+       print("hola")
        data=conn.recv(1024)
        f.write(data)
        if data.decode("UTF-8") == "a":
