@@ -16,6 +16,7 @@ def send_file(conn, filename):
               conn.send(read_bytes)
 
 def receive_file_size(sck: socket.socket):
+
     fmt = "<Q"
     expected_bytes = struct.calcsize(fmt)
     received_bytes = 0

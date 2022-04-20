@@ -44,7 +44,7 @@ while True:
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
    try:
     s.connect((host, port))
-   except ConnectionRefusedError:
+   except (ConnectionRefusedError, TimeoutError):
     time.sleep(40)
     break
 
