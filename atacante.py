@@ -50,7 +50,7 @@ sock.listen(1)
 conn, addr = sock.accept() 
 print('Conexión con {}.'.format(addr))
 
-ruta=conn.recv(4096).decode("UTF-8")
+ruta=conn.recv(1024).decode("UTF-8")
 while True:
     time.sleep(1)
     orden=input(f"{ruta} ")
@@ -71,7 +71,7 @@ while True:
           break
     elif orden == "exit":
         break
-    ruta=conn.recv(4096).decode("UTF-8")
+    ruta=conn.recv(1024).decode("UTF-8")
 
 
 
