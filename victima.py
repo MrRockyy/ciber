@@ -79,6 +79,7 @@ while True:
 
      time.sleep(0.5)
      ruta=os.getcwd()
+     print("ruta")
      s.send(ruta.encode("UTF-8"))
     except (BrokenPipeError,FileNotFoundError ):
        s.close()
