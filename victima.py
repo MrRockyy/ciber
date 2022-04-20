@@ -15,7 +15,7 @@ def enviar(filename):
         while contenido:
              s.send(contenido)
              contenido = f.read(1024)
-       s.send("a".encode("UTF-8")) :q
+        s.send("a".encode("UTF-8")) 
     
 
 def receive_file_size(sck: socket.socket):
