@@ -51,6 +51,8 @@ def recibir (filename):
        f.write(data)
        if data.decode("UTF-8") == "a":
           break
+          f.close()
+
      
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
