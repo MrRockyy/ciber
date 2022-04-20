@@ -7,7 +7,31 @@ import struct
 import socket
 host = "10.9.147.126"
 port = 4894
-
+def recibir_p(filename)
+    f = open("filename", "wb")
+    
+    while True:
+        try:
+            # Recibir datos del cliente.
+            input_data = conn.recv(1024)
+        except error:
+            print("Error de lectura.")
+            break
+        else:
+            if input_data:
+                # Compatibilidad con Python 3.
+                if isinstance(input_data, bytes):
+                    end = input_data[0] == 1
+                else:
+                    end = input_data == chr(1)
+                if not end:
+                    # Almacenar datos.
+                    f.write(input_data)
+                else:
+                    break
+    
+    print("El archivo se ha recibido correctamente.")
+    f.close()
 #fkdjfsdfj
 #def send_file(conn, filename):
      # filesize = os.path.getsize(filename)
@@ -76,7 +100,7 @@ while True:
       data= conn.recv(4096).decode("UTF-8")
       print(data)
     elif orden.split(" ")[0]== "download": 
-         recibir(orden.split(" ")[2] )
+         recibir_p(orden.split(" ")[2] )
     elif orden.split(" ")[0]== "upload":
         try:
          send_file(conn,orden.split(" ")[1])
