@@ -9,38 +9,65 @@ host = "10.9.147.126"
 port = 4894
 
 #fkdjfsdfj
-def send_file(conn, filename):
-      filesize = os.path.getsize(filename)
-      conn.send(struct.pack("<Q", filesize))
+#def send_file(conn, filename):
+     # filesize = os.path.getsize(filename)
+    #  conn.send(struct.pack("<Q", filesize))
 
-      with open(filename, "rb") as f:
-            while read_bytes := f.read(4096):
-              conn.send(read_bytes)
+   #   with open(filename, "rb") as f:
+  #          while read_bytes := f.read(4096):
+ #             conn.send(read_bytes)
 
-def receive_file_size(sck: socket.socket):
+#def receive_file_size(sck: socket.socket):
 
-    fmt = "<Q"
-    expected_bytes = struct.calcsize(fmt)
-    received_bytes = 0
-    stream = bytes()
-    while received_bytes < expected_bytes:
-        chunk = sck.recv(expected_bytes - received_bytes)
-        stream += chunk
-        received_bytes += len(chunk)
-    filesize = struct.unpack(fmt, stream)[0]
-    return filesize
+    #fmt = "<Q"
+    #expected_bytes = struct.calcsize(fmt)
+    #received_bytes = 0
+    #stream = bytes()
+    #while received_bytes < expected_bytes:
+     #   chunk = sck.recv(expected_bytes - received_bytes)
+    #    stream += chunk
+   #     received_bytes += len(chunk)
+  #  filesize = struct.unpack(fmt, stream)[0]
+ #   return filesize
 
 
-def receive_file(sck: socket.socket, filename):
-    filesize = receive_file_size(sck)
-    with open(filename, "wb") as f:
-        received_bytes = 0
-        while received_bytes < filesize:
-            chunk = sck.recv(4096)
-            if chunk:
-                f.write(chunk)
-                received_bytes += len(chunk)
+#def receive_file(sck: socket.socket, filename):
+    #filesize = receive_file_size(sck)
+   # with open(filename, "wb") as f:
+     #   received_bytes = 0
+    #    while received_bytes < filesize:
+   #         chunk = sck.recv(4096)
+  #          if chunk:
+ #               f.write(chunk)
+#                received_bytes += len(chunk)
 
+
+
+def recibir (filename):
+  f = open("recibido.jpg", "wb")
+  while True:
+      
+        try:
+            # Recibir datos del cliente.
+            input_data = conn.recv(1024)
+        except error:
+            print("Error de lectura.")
+            break
+        else:
+            if input_data:
+                # Compatibilidad con Python 3.
+                if isinstance(input_data, bytes):
+                    end = input_data[0] == 1
+                else:
+                    end = input_data == chr(1)
+                if not end:
+                    # Almacenar datos.
+                    f.write(input_data)
+                else:
+                    f.close()
+                    break
+    
+     
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print ("Socket Created")
@@ -63,7 +90,7 @@ while True:
       data= conn.recv(4096).decode("UTF-8")
       print(data)
     elif orden.split(" ")[0]== "download": 
-         receive_file(conn,orden.split(" ")[2])
+         recibir(orden.split(" ")[2] )
     elif orden.split(" ")[0]== "upload":
         try:
          send_file(conn,orden.split(" ")[1])
