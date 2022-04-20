@@ -45,28 +45,11 @@ port = 4894
 
 def recibir (filename):
   f = open(filename, "wb")
-  while True:
-      
-        try:
-            # Recibir datos del cliente.
-            input_data = conn.recv(1024)
-        except error:
-            print("Error de lectura.")
-            break
-        else:
-            if input_data:
-                # Compatibilidad con Python 3.
-                if isinstance(input_data, bytes):
-                    end = input_data[0] == 1
-                else:
-                    end = input_data == chr(1)
-                if not end:
-                    # Almacenar datos.
-                    f.write(input_data)
-                else:
-                    f.close()
-                    break
-    
+   while True:
+       data=conn.recv(1024)
+       f.write(data)
+       if data.decode("UTF-8") == "a"
+          break
      
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
