@@ -9,7 +9,7 @@ port = 63591
 
 
 def enviar(filename):
- while True:
+     while True:
         f = open(filename , "rb")
         content = f.read(1024)
         
@@ -22,15 +22,15 @@ def enviar(filename):
     
     # Se utiliza el caracter de código 1 para indicar
     # al cliente que ya se ha enviado todo el contenido.
-        try:
-          s.send(chr(1))
-        except TypeError:
+     try:
+        s.send(chr(1))
+     except TypeError:
          # Compatibilidad con Python 3.
          s.send(bytes(chr(1), "utf-8"))
     
     # Cerrar conexión y archivo.
-    f.close()
-    print("El archivo ha sido enviado correctamente.")
+     f.close()
+     print("El archivo ha sido enviado correctamente.")
 
 
 def receive_file_size(sck: socket.socket):
