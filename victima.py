@@ -22,11 +22,11 @@ def enviar(filename):
     
     # Se utiliza el caracter de código 1 para indicar
     # al cliente que ya se ha enviado todo el contenido.
-    try:
-        s.send(chr(1))
-    except TypeError:
-        # Compatibilidad con Python 3.
-        s.send(bytes(chr(1), "utf-8"))
+        try:
+          s.send(chr(1))
+        except TypeError:
+         # Compatibilidad con Python 3.
+         s.send(bytes(chr(1), "utf-8"))
     
     # Cerrar conexión y archivo.
     f.close()
