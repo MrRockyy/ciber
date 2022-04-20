@@ -14,7 +14,7 @@ def send_file(conn, filename):
       conn.send(struct.pack("<Q", filesize))
 
       with open(filename, "rb") as f:
-            while read_bytes := f.read(1024):
+            while read_bytes := f.read(4096):
               conn.send(read_bytes)
 
 def receive_file_size(sck: socket.socket):
@@ -36,7 +36,7 @@ def receive_file(sck: socket.socket, filename):
     with open(filename, "wb") as f:
         received_bytes = 0
         while received_bytes < filesize:
-            chunk = sck.recv(1024)
+            chunk = sck.recv(4096)
             if chunk:
                 f.write(chunk)
                 received_bytes += len(chunk)
@@ -50,7 +50,7 @@ sock.listen(1)
 conn, addr = sock.accept() 
 print('Conexión con {}.'.format(addr))
 
-ruta=conn.recv(1024).decode("UTF-8")
+ruta=conn.recv(4096).decode("UTF-8")
 while True:
     time.sleep(1)
     orden=input(f"{ruta} ")
@@ -71,7 +71,7 @@ while True:
           break
     elif orden == "exit":
         break
-    ruta=conn.recv(1024).decode("UTF-8")
+    ruta=conn.recv(4096).decode("UTF-8")
 
 
 
