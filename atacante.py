@@ -44,7 +44,7 @@ port = 4894
 
 
 def recibir (filename):
-  f = open("recibido.jpg", "wb")
+  f = open(filename, "wb")
   while True:
       
         try:
