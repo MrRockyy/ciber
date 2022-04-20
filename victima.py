@@ -37,7 +37,7 @@ def send_file(s, filename):
     filesize = os.path.getsize(filename)
     s.send(struct.pack("<Q", filesize))
     with open(filename, "rb") as f:
-        read_bytes = f.read(1024)
+        read_bytes = f.read(4096)
         while read_bytes :
             s.send(read_bytes)
 while True:
