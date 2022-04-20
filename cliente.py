@@ -6,7 +6,7 @@ import socket
 host = "10.9.147.126"
 port = 4894
 
-
+#fkdjfsdfj
 def send_file(conn, filename):
       filesize = os.path.getsize(filename)
       conn.send(struct.pack("<Q", filesize))
